@@ -301,7 +301,7 @@ def delete_user_by_email(email: str):
     """
     is_deleted = UserService.delete_user_by_email(email)
 
-    return jsonify({"message": "User deleted" if is_deleted else "User not found"}), 200 if is_deleted else 404
+    return 200 if is_deleted else 404
 
 
 @app.route('/user/<string:email>', methods=['PUT'])
