@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: mac
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: FlaskUserCRUD
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    container_name: flask_api
+    environment:
+      - DATABASE_URL=postgresql://mac:1234@db:5433/FlaskUserCRUD
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
